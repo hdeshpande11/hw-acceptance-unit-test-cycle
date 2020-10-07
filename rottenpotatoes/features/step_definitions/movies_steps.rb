@@ -23,3 +23,7 @@ Then /I should see all the movies/ do
     step %{I should see "#{movie.title}"}
   end
 end
+
+#When /^(?:|I )go to (.+) for "(.*)"/ do |page_name, movie_name|
+#  visit path_to(page_name)
+#end
