@@ -24,6 +24,7 @@ Then /I should see all the movies/ do
   end
 end
 
-#When /^(?:|I )go to (.+) for "(.*)"/ do |page_name, movie_name|
-#  visit path_to(page_name)
-#end
+Then /the director of "([^"]*)" should be "([^"]*)"$/ do |movie_name,director_name|
+  #expect(page.body.index(movie_name) < page.body.index(director_name))
+  expect(page.body).to have_content(/#{movie_name}.*Director:\s?#{director_name}.*/)
+end
