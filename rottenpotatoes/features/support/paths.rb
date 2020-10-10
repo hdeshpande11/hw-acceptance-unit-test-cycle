@@ -18,7 +18,15 @@ module NavigationHelpers
     when /^the edit page for "([^"]*)"$/ then 
       movie = Movie.find_by_title($1)
       '/movies/'+(movie.id).to_s+'/edit'
+      
+    when /^the details page for "([^"]*)"$/ then 
+      movie = Movie.find_by_title($1)
+    #  '/movies/'+(movie.id).to_s+'/similar' # do this after the pages actually open 
+      movie_path(movie)
     
+    when /^the Similar Movies page for "([^"]*)"$/ then
+      movie = Movie.find_by_title($1)
+      '/movies/'+(movie.id).to_s+'/similar'
     
 
     # Add more mappings here.

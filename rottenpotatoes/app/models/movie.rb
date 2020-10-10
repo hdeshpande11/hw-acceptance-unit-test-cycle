@@ -3,5 +3,7 @@ class Movie < ActiveRecord::Base
     %w(G PG PG-13 NC-17 R)
   end
   
-  
+  def self.same_director(movie)
+    self.all.where(director: movie.director)   
+  end  
 end
