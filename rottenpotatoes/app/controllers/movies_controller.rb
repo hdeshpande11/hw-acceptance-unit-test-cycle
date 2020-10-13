@@ -55,33 +55,15 @@ class MoviesController < ApplicationController
   end
   
   def similar 
-    sort = params[:sort] || session[:sort]
-    case sort
-    when 'title'
-      ordering,@title_header = {:title => :asc}, 'bg-warning hilite'
-    when 'release_date'
-      ordering,@date_header = {:release_date => :asc}, 'bg-warning hilite'
-    end
-    @all_ratings = Movie.all_ratings
-    @selected_ratings = params[:ratings] || session[:ratings] || {}
-
-    if @selected_ratings == {}
-      @selected_ratings = Hash[@all_ratings.map {|rating| [rating, rating]}]
-    end
-
-    if params[:sort] != session[:sort] or params[:ratings] != session[:ratings]
-      session[:sort] = sort
-      session[:ratings] = @selected_ratings
-      redirect_to :sort => sort, :ratings => @selected_ratings and return
-    end
+   
     @movie = Movie.find params[:id] #getting an error here, route added, view added, changes made to show
-    if @movie.director.blank?
+    
+    
+    @movies = Movie.same_director(@movie.id)
+    if @movies == nil
       flash[:warning] = "\"'#{@movie.title}' has no director info\""
       redirect_to movies_path
-    else
-      @movies = Movie.same_director(@movie)
     end
-   
     
   end
 
