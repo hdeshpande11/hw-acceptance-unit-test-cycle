@@ -8,7 +8,7 @@ RSpec.describe Movie, type: :model do
     let!(:movie3) { FactoryGirl.create(:movie, title: 'Dil Dhadakne Do', director: 'Zoya Akhtar') } 
     let!(:movie4) { FactoryGirl.create(:movie, title: 'NoDirector')}
 
-    it 'finds similar movies correctly if director exists' do
+    it 'should find similar movies correctly if director exists' do
         expect(Movie.same_director(movie1.id)).to contain_exactly(movie1, movie3)
         expect(Movie.same_director(movie1.id)).to_not match(movie2)
         expect(Movie.same_director(movie2.id)).to contain_exactly(movie2)
@@ -16,7 +16,7 @@ RSpec.describe Movie, type: :model do
    
      
     
-    it 'will handle sad path if director does not exist' do
+    it 'should handle sad path if director does not exist' do
         expect(Movie.same_director(movie4.id)).to eql(nil)
     end
      
