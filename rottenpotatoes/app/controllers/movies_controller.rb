@@ -56,7 +56,7 @@ class MoviesController < ApplicationController
   
   def similar 
    
-    @movie = Movie.find params[:id] #getting an error here, route added, view added, changes made to show
+    @movie = Movie.find params[:id] 
     
     
     @movies = Movie.same_director(@movie.id)
